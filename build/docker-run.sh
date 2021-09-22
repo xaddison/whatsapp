@@ -4,10 +4,10 @@ if [[ -z "$GID" ]]; then
 	GID="$UID"
 fi
 
-function fixperms 
- 	{
+# Define functions.
+function fixperms {
 	chown -R $UID:$GID ./data ./mautrix-whatsapp
-	}
+}
 
 if [[ ! -f ./data/config.yaml ]]; then
 	cp ./mautrix-whatsapp/example-config.yaml ./data/config.yaml
@@ -28,5 +28,4 @@ fi
 
 cd ./data
 fixperms
-docker exec su-exec $UID:$GID ./mautrix-whatsapp
-
+exec su-exec $UID:$GID ./mautrix-whatsapp
